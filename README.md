@@ -1,1 +1,1 @@
-# AMD-Summer-Practice
+# MIPS(Microprocessor without Interlocked Pipelined Stages)
