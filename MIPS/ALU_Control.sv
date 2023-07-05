@@ -11,19 +11,26 @@ module ALU_Control(
   parameter SRL = 6'b000010;
   parameter SLT = 6'b101010;
   
+  reg [3:0] R_out;
+
+  always @(func)
+    case(func)
+      ADD: R_out <= 4'b0000;
+      SUB: R_out <= 4'b0001;
+      AND: R_out <= 4'b0010;
+      OR: R_out <= 4'b0011;
+      SLL: R_out <= 4'b0100;
+      SRL: R_out <= 4'b0101;
+      SLT: R_out <= 4'b0110;
+    endcase
+  
+  
   always @(*)
-    case(aluop)
-      2'b00: aluCtrl <= 4'b0000; //add
-      2'b01: aluCtrl <= 4'b0001; //sub
-      default: case(func)
-        ADD: aluCtrl <= 4'b0000;
-        SUB: aluCtrl <= 4'b0001;
-        AND: aluCtrl <= 4'b0010;
-        OR: aluCtrl <= 4'b0011;
-        SLL: aluCtrl <= 4'b0100;
-        SRL: aluCtrl <= 4'b0101;
-        SLT: aluCtrl <= 4'b0110;
-      endcase
+     case(aluop)
+      2'b00: aluCtrl <= R_out; 
+      2'b01: aluCtrl <= 4'b0000; //sw, lw
+      2'b10: aluCtrl <= 4'b0111; 
+      2'b11: aluCtrl <= 4'b1000;
     endcase
 endmodule
   
