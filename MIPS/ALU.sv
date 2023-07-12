@@ -1,15 +1,20 @@
 module ALU (
-  input [31:0] srcA,
-  input [31:0] srcB,
+  input ALUSrc,
+  input  [31:0] srcA,
+  input  [31:0] srcB,
+  input [31:0] imm,
   input [3:0] ALUCtrl,
   output reg [31:0] ALUResult,
-  output wire overflow,
-  output reg Zero )
+  output reg Zero );
+  
+  wire [31:0] dataImm;
+  assign dataImm = (ALUSrc == 0) ? srcB : imm;
   
   always @(*) begin
+    Zero = 0;
     case(ALUCtrl)
-      4'b0000: ALUResult <= srcA + srcB; //add
-      4'b0001: ALUResult <= srcA - srcB; //sub
+      4'b0000: ALUResult <= srcA + dataImm; //add
+      4'b0001: ALUResult <= srcA - dataImm; //sub
       4'b0010: ALUResult <= srcA & srcB; //and
       4'b0011: ALUResult <= srcA | srcB; //or
       4'b0100: ALUResult <= srcA << srcB; //sll

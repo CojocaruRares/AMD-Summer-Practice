@@ -1,3 +1,4 @@
+
 module Control(
   input wire [5:0] opcode,
   output RegDst,
@@ -25,11 +26,11 @@ module Control(
   
   always @(*)
     case(opcode)
-      R_TYPE: controls <= 10'b1100000010;
-      ADDI: controls <= 10'b0100000100;
-      LW: controls <= 10'b0100110100;
-      SW: controls <= 10'b0000001100;
-      BEQ: controls <= 10'b0001000001;
+      R_TYPE: controls <= 10'b1100000000;
+      ADDI: controls <= 10'b0100000101;
+      LW: controls <= 10'b0100110101;
+      SW: controls <= 10'b0000001101;
+      BEQ: controls <= 10'b0001000010;
       BNE: controls <= 10'b0001000011;
       J: controls <= 10'b0010000000;
       default: controls <= 10'bxxxxxxxxxx;

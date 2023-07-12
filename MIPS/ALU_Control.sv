@@ -28,7 +28,7 @@ module ALU_Control(
   always @(*)
      case(aluop)
       2'b00: aluCtrl <= R_out; 
-      2'b01: aluCtrl <= 4'b0000; //sw, lw
+      2'b01: aluCtrl <= 4'b0000; //sw, lw, addi
       2'b10: aluCtrl <= 4'b0111; 
       2'b11: aluCtrl <= 4'b1000;
     endcase

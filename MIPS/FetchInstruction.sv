@@ -4,6 +4,7 @@ module FetchInstruction(
 );
   
   parameter data_file = ("data.txt");
+  
   reg [31:0] memory [63:0];
   
   initial begin
