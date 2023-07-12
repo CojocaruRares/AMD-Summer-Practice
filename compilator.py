@@ -1,3 +1,4 @@
+import tkinter as tk
 
 opcode_table = {
     'addi': '001000',
@@ -115,14 +116,31 @@ def mips_to_hex(instruction):
     
     return hex_code
 
-while (True):
+def compile():
     try:
-        f = open("data.txt","a")
-        instrucion = input("Instructiune MIPS: ")
+        f = open("data.txt", "a")
+        instrucion = input_field.get()
         hex_code = mips_to_hex(instrucion)
-        f.write(hex_code+'\n')
+        result_field.insert(1.0, hex_code + '\n')
+        f.write(hex_code + '\n')
         f.close()
     except:
-        print('Ai introdus instructiunea gresit.\nFormat: sw t1, t2, 15  sau add s1, zero, s2')
-        quit()
+        result_field.delete(1.0, tk.END)
+        result_field.insert(1.0, 'Ai introdus instructiunea gresit.\nFormat: sw t1, t2, 15  sau add s1, zero, s2')
+
+window = tk.Tk()
+window.title("Mips Compiler")
+window.geometry("500x500")
+
+input_field = tk.Entry(window, font=('Arial', 15))
+input_field.pack(padx=10,pady=50)
+
+result_field= tk.Text(window, width=200, height=10, font=('Arial', 15))
+result_field.pack(padx=50, pady=10)
+
+button = tk.Button(window, text="Compile", command=compile)
+button.config(width=10, height=2, bg="green",  font=("Arial", 12, "bold"))
+button.pack(side=tk.TOP)
+
+window.mainloop()
 
