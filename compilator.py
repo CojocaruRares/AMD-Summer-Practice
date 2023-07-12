@@ -119,28 +119,40 @@ def mips_to_hex(instruction):
 def compile():
     try:
         f = open("data.txt", "a")
-        instrucion = input_field.get()
-        hex_code = mips_to_hex(instrucion)
+        instruction = input_field.get()
+        hex_code = mips_to_hex(instruction)
         result_field.insert(1.0, hex_code + '\n')
         f.write(hex_code + '\n')
         f.close()
     except:
         result_field.delete(1.0, tk.END)
-        result_field.insert(1.0, 'Ai introdus instructiunea gresit.\nFormat: sw t1, t2, 15  sau add s1, zero, s2')
+        result_field.insert(1.0, 'Ai introdus instructiunea greșit.\nFormat: sw t1, t2, 15 sau add s1, zero, s2')
 
 window = tk.Tk()
 window.title("Mips Compiler")
 window.geometry("500x500")
 
-input_field = tk.Entry(window, font=('Arial', 15))
-input_field.pack(padx=10,pady=50)
 
-result_field= tk.Text(window, width=200, height=10, font=('Arial', 15))
-result_field.pack(padx=50, pady=10)
+window.configure(bg="#f2f2f2")
+
+title_label = tk.Label(window, text="Mips Compiler", font=("Arial", 20, "bold"), bg="#f2f2f2")
+title_label.pack(pady=8)
+
+input_frame = tk.Frame(window, bg="#f2f2f2")
+input_frame.pack(pady=50)
+
+input_label = tk.Label(input_frame, text="Instrucțiune:", font=("Arial", 15), bg="#f2f2f2")
+input_label.pack(side=tk.LEFT)
+
+input_field = tk.Entry(input_frame, font=("Arial", 15), borderwidth=2)
+input_field.pack(padx=10)
+
+result_field = tk.Text(window, width=50, height=10, font=("Arial", 15), borderwidth=2)
+result_field.pack(padx=10, pady=10)
 
 button = tk.Button(window, text="Compile", command=compile)
-button.config(width=10, height=2, bg="green",  font=("Arial", 12, "bold"))
-button.pack(side=tk.TOP)
+button.config(width=10, height=3, bg="#4CAF50", fg="white", font=("Arial", 12, "bold"))
+button.pack(pady=12)
 
 window.mainloop()
 
